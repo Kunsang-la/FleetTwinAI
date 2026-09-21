@@ -3,7 +3,9 @@ const path = require("path");
 const CSVSource = require("../../replay/CSVSource");
 const ReplayEngine = require("../../replay/ReplayEngine");
 const FleetTwinRuntime = require("../../core/FleetTwinRuntime");
-
+const RuntimeManager = require("../../core/RuntimeManager");
+const runtime = new FleetTwinRuntime(replay);
+RuntimeManager.setRuntime(runtime);
 (async () => {
 
     const source = new CSVSource(
@@ -18,6 +20,8 @@ const FleetTwinRuntime = require("../../core/FleetTwinRuntime");
     const replay = new ReplayEngine(source);
 
     const runtime = new FleetTwinRuntime(replay);
+
+    
 
     await runtime.start();
 

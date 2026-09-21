@@ -63,9 +63,14 @@ class VehicleState {
             }
 
             if (signal.key === "activeDTCs") {
-
-                this.diagnostics.activeDTCs.push(signal.value);
-
+                const newDtc = signal.value;
+                const existing = this.diagnostics.activeDTCs.find(d => d.spn === newDtc.spn && d.fmi === newDtc.fmi);
+                
+                if (existing) {
+                    existing.occurrenceCount += 1;
+                } else {
+                    this.diagnostics.activeDTCs.push(newDtc);
+                }
             } else {
 
                 this[signal.category][signal.key] = signal.value;

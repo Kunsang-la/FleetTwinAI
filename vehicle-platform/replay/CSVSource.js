@@ -66,6 +66,11 @@ class CSVSource extends FrameSource {
         });
 
     }
+    async reset() {
+
+    await this.open();
+
+}
 
     async close() {
 
